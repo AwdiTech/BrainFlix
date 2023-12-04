@@ -1,1 +1,22 @@
- 
+// ----- Font Face Declarations -----
+
+@font-face {
+    font-family: 'Avenir Next';
+    src: url('./../assets/fonts/AvenirNextLTPro-Regular.otf') format('opentype'),
+    url('./../assets/fonts/Alternative%20files/AvenirNextLTPro.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    src: url('./../assets/fonts/AvenirNextLTPro-Bold.otf') format('opentype'),
+    url('./../assets/fonts/Alternative%20files/AvenirNextLTProBold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    src: url('./../assets/fonts/AvenirNextLTPro-Demi.otf') format('opentype'),
+    url('./../assets/fonts/Alternative%20files/AvenirNextLTProDemi.ttf') format('truetype');
+    font-weight: 600;
+}

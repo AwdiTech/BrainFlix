@@ -1,1 +1,20 @@
- 
+// ----- SCSS Variables -----
+
+$brainflix-black: #323232;
+$brainflix-blue: #0095FF;
+$silver: #AFAFAF;
+$white: #FFFFFF;
+
+$brainflix-darkblack: #000000;
+$brainflix-darkblue: #0065AD;
+$mercury: #E1E1E1;
+$alabaster: #FAFAFA;
+
+
+// --- Device Breakpoint Variables ---
+$mobile-breakpoint: 320px;
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+// MOBILE screen sizes are defined at 320px, but are applied to screen sizes 767px and below.
+// TABLET screen sizes are defined at 768px, but are applied to screen sizes from 768px to 1279px.
+// DESKTOP screen sizes are defined at 1280px, but are applied to screen sizes 1280px and greater. 

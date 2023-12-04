@@ -1,1 +1,147 @@
- 
+// ----- Global Styles -----
+
+@use './variables' as *;
+@use './mixins' as *;
+@use './fonts' as *;
+
+
+// Global Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Avenir Next', Helvetica, Arial, Verdana, sans-serif;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+
+// --- Style Guide Specifications ---
+
+//Page Header
+.page-header {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+
+    @include tablet-breakpoint {
+        font-size: 33px;
+        line-height: 44px;
+    }
+}
+
+//Section Header
+.section-header {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+
+    @include tablet-breakpoint {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+//Sub-Header
+.subheader {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 600;
+
+    @include tablet-breakpoint {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+
+body {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    color: $brainflix-black;
+
+    @include tablet-breakpoint {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+//Styling for labels & buttons
+.labels-buttons {
+    font-size: 10px;
+    line-height: 20px;
+    font-weight: 700;
+
+    @include tablet-breakpoint {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+
+
+//---- Utility Styles------
+
+//BrainFlix Logo
+.bf-logo {
+    height: 25px;
+    width: 120px;
+    margin: 16px 0px;
+}
+
+
+.special-label{
+    color: $silver;
+}
+
+
+//User Icon Styling
+.user-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    object-position: 20% center;
+    border-radius: 50%;
+
+    @include tablet-breakpoint {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+//Call-To-Action Button Styling
+.cta-button {
+    background-color: $brainflix-blue;
+    height: 40px;
+    width: 100%;
+    min-width: 150px;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 32px 0px;
+    color: $mercury;
+    font-weight: 600;
+    font-size: 12px;
+    transition: transform 0.2s ease;
+
+    @include tablet-breakpoint {
+        width: 150px;
+    }
+
+
+    &:hover {
+        background-color: $brainflix-darkblue;
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+//Aesthetic Icon Styling
+.style-icon {
+    width: 20px;
+    height: 20px;
+}
