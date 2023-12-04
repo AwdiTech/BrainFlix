@@ -8,7 +8,9 @@ import { TimeAgoProvider } from './context/TimeAgoContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <TimeAgoProvider>
       <App />
+    </TimeAgoProvider>
   </React.StrictMode>
 );
 

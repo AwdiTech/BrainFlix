@@ -45,10 +45,11 @@
         grid-column: 1;
         grid-row: 2;
         width: 100%;
-        max-width: 240px;
+        min-width: 240px;
 
         @include tablet-breakpoint {
             order: 2;
+            max-width: 240px;
         }
         @include desktop-breakpoint {
             max-width: 280px;
