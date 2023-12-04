@@ -1,6 +1,6 @@
 # BrainFlix
 
-![BrainFlix Interface](https://i.imgur.com/p9DvIfp.png)
+![BrainFlix Interface](https://i.imgur.com/8EoV4DH.png)
 
 ## Overview
 BrainFlix is a dynamic video streaming platform designed to deliver a seamless viewing experience. It features a user-friendly interface, personalized content discovery, and a suite of interactive functionalities that cater to both content creators and viewers.
