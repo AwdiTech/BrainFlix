@@ -1,0 +1,129 @@
+// ----- CommentSection Styles -----
+
+@use './../../styles/mixins' as *;
+@use './../../styles/variables' as *;
+
+
+.comment-section {
+    padding-right: 16px;
+    margin-left: 16px;
+    border-bottom: 1px solid $mercury;
+    min-width: 304px;
+
+
+    @include tablet-breakpoint {
+        padding: 0;
+        margin: 0 40px;
+    }
+    @include desktop-breakpoint {
+        padding: 0;
+        margin-left: 9rem;
+        margin-right: 0;
+        border-right: 1px solid $mercury;
+        border-bottom: none;
+    }
+
+    &__count {
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+.input-comment {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    @include desktop-breakpoint {
+        padding-right: 1.5rem;
+    }
+
+
+    &__user {
+        margin-top: 16px;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__label {
+        font-weight: 400;
+        font-size: 12.5px;
+        padding: 2px 0;
+        text-shadow: 0.625px 0.625px 0.5px $silver; // horizontal shadow, vertical shadow, blur radius, color
+
+        @include tablet-breakpoint {
+            text-shadow: 0.25px 0.25px 0.5px $silver; // horizontal shadow, vertical shadow, blur radius, color
+
+        }
+    }
+
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+
+        @include tablet-breakpoint {
+            flex-direction: row;
+            align-items: flex-start;
+            padding-bottom: 1.75rem;
+            gap: 1.5rem;
+        }
+    }
+
+
+    &__textarea {
+        border-radius: 4px;
+        min-height: 36px;
+        border: 1px solid $mercury;
+        padding: 12px;
+        background-color: $alabaster;
+        resize: none;
+        min-width: 240px;
+        max-width: 100%;
+        font-size: 0.875rem;
+        flex-grow: 1;
+
+        @include tablet-breakpoint {
+            height: 2.5rem;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+
+        &::placeholder {
+            color: $brainflix-darkblack;
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid $brainflix-blue;
+        }
+
+        &--error {
+            border: 1px solid #D22D2D;
+        }
+    }
+
+    &__button {
+        margin: 16px 0;
+        position: relative;
+
+        @include tablet-breakpoint {
+            margin: 0;
+            font-size: 12px;
+            padding-top: 4px;
+        }
+
+    }
+
+    &__icon {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+    }
+}
