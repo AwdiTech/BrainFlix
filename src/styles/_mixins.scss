@@ -1,0 +1,21 @@
+// ----- SCSS Mixins -----
+
+@use './variables' as *;
+
+@mixin mobile-breakpoint {
+    @media screen and (min-width: $mobile-breakpoint) {
+        @content;
+    }
+}
+
+@mixin tablet-breakpoint {
+    @media screen and (min-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin desktop-breakpoint {
+    @media screen and (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}

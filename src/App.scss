@@ -1,0 +1,23 @@
+// ----- App.js Styling -----
+
+@use './styles/global' as *;
+@use './styles/fonts' as *;
+@use './styles/mixins' as *;
+
+
+.main-content {
+    @include desktop-breakpoint {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+
+        &__leftside {
+            width: 70%;
+        }
+
+        &__rightside {
+            width: 30%;
+        }
+    }
+}

@@ -1,0 +1,97 @@
+// ----- VideoDetails Styling -----
+
+@use './../styles/mixins' as *;
+@use './../styles/variables' as *;
+
+
+.vid-details{
+    min-width: 320px;
+    padding: 1rem;
+
+    @include tablet-breakpoint {
+        padding: 1rem 40px 2rem;
+    }
+    @include desktop-breakpoint {
+        padding: 1.5rem 2rem 3.5rem 9rem;
+        border-right: 1px solid $mercury;
+    }
+
+
+    &__title {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $mercury;
+
+        @include tablet-breakpoint {
+            border-bottom: none;
+            padding-bottom: 0;
+            font-weight: 700;
+        }
+    }
+}
+
+.vid-data {
+    display: flex;
+    flex-direction: row;
+    padding: 16px 0;
+    border-bottom: 1px solid $mercury;
+
+    @include tablet-breakpoint {
+        padding-bottom: 8px;
+    }
+
+
+    &__leftside-wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 0.75rem;
+
+        @include tablet-breakpoint {
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+
+    &__channel {
+        @include tablet-breakpoint {
+            font-weight: 700;
+        }
+    }
+
+    
+    &__rightside-wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 0.75rem;
+        padding-left: 16px;
+
+        @include tablet-breakpoint {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+    }
+
+    &__date {
+        @include tablet-breakpoint {
+            font-size: 12px;
+        }
+    }
+
+    &__views, &__likes{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        @include tablet-breakpoint {
+            font-size: 12px;
+        }
+    }
+
+    &__description {
+        padding-top: 16px;
+    }
+}

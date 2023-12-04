@@ -1,0 +1,73 @@
+// ----- NextVideo Styles -----
+
+@use './../../styles/mixins' as *;
+@use './../../styles/variables' as *;
+
+.next-video {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70px;
+    width: calc(100% - 16px);
+    min-width: 288px;
+    max-width: 325px;
+    gap: 1rem;
+    
+    @include desktop-breakpoint {
+        width: 325px;
+    }
+
+
+    &:hover {
+        background-color: rgba($brainflix-blue, 0.1);
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+
+
+    &__thumbnail-wrapper {
+        background-color: $mercury;
+        height: 70px;
+        width: 120px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    &__thumbnail {
+        width: 120px;
+        height: 70px;
+        object-fit: cover;
+        object-position: center center;
+    }
+
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 70px;
+        gap: 0.5rem;
+        overflow: hidden;
+        
+    }
+
+    &__title {
+        height: 55%;
+        width: 100%;
+        margin-top: 0.2rem;
+        font-weight: 600;
+        font-size: 0.94rem;
+
+        .LinesEllipsis {
+            max-height: 100%;
+            overflow: hidden;
+        }
+    }
+
+    &__channel {
+        color: $brainflix-darkblack;
+        font-size: 0.90rem;
+    }
+}

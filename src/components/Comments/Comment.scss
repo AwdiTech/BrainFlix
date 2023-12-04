@@ -1,0 +1,115 @@
+// ----- Comment Styles -----
+
+@use './../../styles/mixins' as *;
+@use './../../styles/variables' as *;
+
+.comment {
+    display: flex;
+    position: relative;
+    border-top: 1px solid $mercury;
+    padding: 1rem 0;
+    
+    @include tablet-breakpoint {
+        padding: 1.75rem 0 1rem;
+    }
+    @include desktop-breakpoint {
+        padding-right: 2rem;
+        gap: 1.425rem;
+    }
+
+
+    &__user-icon-wrapper {
+        background-color: $mercury;
+        border-radius: 50%;
+        margin-right: 1rem;
+        width: 36px;
+        height: 36px;
+        
+    
+        @include tablet-breakpoint {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    &__user-icon {
+        visibility: hidden;
+    }
+
+
+    &-body {
+        @include tablet-breakpoint {
+            margin-bottom: 0.5rem;
+        }
+        @include desktop-breakpoint {
+            padding-right: 1rem;
+        }
+
+
+        &__name {
+            margin-bottom: 0.625rem;
+            font-weight: 600;
+
+            @include tablet-breakpoint {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        &__date {
+            position: absolute;
+            top: 1rem;
+            right: 0;
+            font-size: 0.8rem;
+            color: $silver;
+
+            @include tablet-breakpoint {
+                top: 1.75rem;
+            }
+            @include desktop-breakpoint {
+                padding-right: 2.5rem;
+            }
+        }
+
+        &__text {
+            color: $brainflix-darkblack;
+            font-size: 0.9rem;
+            line-height: 1.4rem;
+        }
+
+        &__likes {
+            position: absolute;
+            bottom: 0.4rem;
+            right: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+
+            @include tablet-breakpoint {
+                bottom: 0.5rem;
+            }
+
+
+            &-count {
+                margin-bottom: -0.25rem;
+                font-size: 0.8rem;
+                color: green;
+            }
+        }
+
+        &__delete {
+            position: absolute;
+            bottom: 0.4rem;
+            right: 0.5rem;
+            height: 16px;
+            cursor: pointer;
+        
+            @include tablet-breakpoint {
+                bottom: 0.5rem;
+            }
+        }
+
+    }
+}
