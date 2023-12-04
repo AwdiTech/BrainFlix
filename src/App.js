@@ -32,11 +32,23 @@ import NextVideosList from './components/VideoRecommendations/NextVideosList.js'
 
 function App() {
 
+    // State Variables initialized with default starting video ID 
+    const [mainVideo, setMainVideo] = useState(videoDetails.find(video => video.id === "84e96018-4022-434e-80bf-000ce4cd12b8"));
+    const [videosList, setVideosList] = useState(videos.filter(video => video.id !== mainVideo.id));
+
+
+    // Function to update the main video and videos list based on the selected video ID
+    const selectVideo = function (id) {
+        setMainVideo(videoDetails.find((video) => video.id === id));
+        setVideosList(videos.filter(video => video.id !== id));
+    }
+
+
     return (
         <div className="App">
 
             <Header />
-{/* 
+
             <VideoPlayer poster={mainVideo.image} video={mainVideo.video} duration={mainVideo.duration} />
 
             <section className='main-content'>
@@ -48,7 +60,7 @@ function App() {
                 <section className='main-content__rightside'>
                     <NextVideosList videos={videosList} clickHandler={selectVideo} />
                 </section>
-            </section> */}
+            </section>
 
         </div>
     );
