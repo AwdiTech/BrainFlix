@@ -18,7 +18,6 @@ BrainFlix is a dynamic video streaming platform designed to deliver a seamless v
 - Node.js
 - SCSS
 - `react-lines-ellipsis` for multiline text truncation
-- JSON Server (for mock backend)
 
 
 
