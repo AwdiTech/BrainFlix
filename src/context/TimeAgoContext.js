@@ -41,7 +41,6 @@ function calculateTimeAgo(date) {
     } else if (months < 12) {
         return `${months} months ago`;
     } else {
-
         return commentDate.toLocaleString('en-US', { day: "2-digit", month: "2-digit", year: "numeric" });
     }
 }
