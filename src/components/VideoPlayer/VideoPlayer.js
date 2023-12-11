@@ -13,7 +13,7 @@ import './VideoPlayer.scss';
  */
 
 
-function VideoPlayer({ poster, video, duration }) {
+function VideoPlayer({ poster, video }) {
 
     return (
         <section className="video-player__wrapper">

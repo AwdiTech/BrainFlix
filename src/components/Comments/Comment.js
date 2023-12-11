@@ -17,7 +17,7 @@ import { useContext } from 'react';
  */
 
 
-function Comment({ id, name, comment, likes, timestamp }) {
+function Comment({ name, comment, timestamp }) {
 
     const calculateTimeAgo = useContext(TimeAgoContext)
 
