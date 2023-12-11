@@ -1,7 +1,7 @@
-import logo from '../assets/Logo/BrainFlix-logo.svg';
-import searchIcon from '../assets/Icons/search.svg';
-import userIcon from '../assets/images/Mohan-muruge.jpg';
-import uploadIcon from '../assets/Icons/upload.svg';
+import logo from './../../assets/Logo/BrainFlix-logo.svg';
+import searchIcon from './../../assets/Icons/search.svg';
+import userIcon from './../../assets/images/Mohan-muruge.jpg';
+import uploadIcon from './../../assets/Icons/upload.svg';
 import './Header.scss';
 
 /**

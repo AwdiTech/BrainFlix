@@ -1,6 +1,6 @@
-import viewsIcon from '../assets/Icons/views.svg';
-import likesIcon from '../assets/Icons/likes.svg';
-import { TimeAgoContext } from '../context/TimeAgoContext';
+import viewsIcon from './../../assets/Icons/views.svg';
+import likesIcon from './../../assets/Icons/likes.svg';
+import { TimeAgoContext } from './../../context/TimeAgoContext';
 import { useContext } from 'react';
 import './VideoDetails.scss';
 

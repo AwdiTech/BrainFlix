@@ -2,9 +2,9 @@ import './App.scss';
 import videos from './data/videos.json';
 import videoDetails from './data/video-details.json';
 import { useState } from 'react';
-import Header from './components/Header.js';
-import VideoPlayer from './components/VideoPlayer.js';
-import VideoDetails from './components/VideoDetails.js';
+import Header from './components/Header/Header.js';
+import VideoPlayer from './components/VideoPlayer/VideoPlayer.js';
+import VideoDetails from './components/VideoDetails/VideoDetails.js';
 import CommentSection from './components/Comments/CommentSection.js';
 import NextVideosList from './components/VideoRecommendations/NextVideosList.js';
 
