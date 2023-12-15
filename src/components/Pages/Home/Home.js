@@ -32,7 +32,7 @@ import { useParams } from 'react-router-dom';
 
 function Home() {
 
-    const defaultVideo = videoDetails.find(video => video.id === "84e96018-4022-434e-80bf-000ce4cd12b8"));
+    const defaultVideo = videoDetails.find(video => video.id === "84e96018-4022-434e-80bf-000ce4cd12b8");
 
     // State Variables initialized with default starting video ID 
     const [mainVideo, setMainVideo] = useState(videoDetails.find(video => video.id === "84e96018-4022-434e-80bf-000ce4cd12b8"));

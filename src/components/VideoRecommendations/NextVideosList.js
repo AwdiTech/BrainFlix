@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 function NextVideosList({ videos }) {
 
     let navigate = useNavigate();
+    
     const clickHandler = function (id) {
         navigate('/videos/' + id);
     }

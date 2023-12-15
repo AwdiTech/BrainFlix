@@ -3,6 +3,7 @@ import searchIcon from './../../assets/Icons/search.svg';
 import userIcon from './../../assets/images/Mohan-muruge.jpg';
 import uploadIcon from './../../assets/Icons/upload.svg';
 import './Header.scss';
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * Header Component
@@ -14,17 +15,17 @@ import './Header.scss';
 
 function Header() {
 
-    const navigate = useNavigate
+    let navigate = useNavigate();
 
-    const gotoUploadPage = function () {
-
+    const gotoUpload = function () {
+        navigate('/upload');
     }
 
     return (
         <header className="main-nav">
 
             <div className='main-nav__logo-container'>
-                <img className="main-nav__logo bf-logo" src={logo} alt="" /> {/*BrainFlix Logo*/}
+                <Link to='/'><img className="main-nav__logo bf-logo" src={logo} alt="" /></Link> {/*BrainFlix Logo*/}
             </div>
 
             <div className="main-nav__search-bar">
@@ -36,9 +37,9 @@ function Header() {
                 <img className="main-nav__user-icon user-icon" src={userIcon} alt="" /> {/*Icon*/}
             </div>
 
-            <button className="main-nav__upload-button cta-button">
-                <img src={uploadIcon} className="main-nav__upload-icon style-icon" alt="" />
-                UPLOAD
+            <button className="main-nav__upload-button cta-button" onClick={gotoUpload}>
+                    <img src={uploadIcon} className="main-nav__upload-icon style-icon" alt="" />
+                    UPLOAD
             </button>
 
         </header>

@@ -27,10 +27,8 @@ function App() {
 
     return (
         <div className="App">
-
-            <Header />
-
             <Router>
+                <Header />
                 <Routes>
                     <Route path="/upload" element={<Upload />} />
                     <Route path="/videos/:videoId" element={<Home />} />
