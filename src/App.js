@@ -1,47 +1,28 @@
-import './App.scss';
-import videos from './data/videos.json';
-import videoDetails from './data/video-details.json';
-import { useState } from 'react';
 import Header from './components/Header/Header.js';
-import VideoPlayer from './components/VideoPlayer/VideoPlayer.js';
-import VideoDetails from './components/VideoDetails/VideoDetails.js';
-import CommentSection from './components/Comments/CommentSection.js';
-import NextVideosList from './components/VideoRecommendations/NextVideosList.js';
+import Home from './components/Pages/Home/Home.js';
+import Upload from './components/Pages/Upload/Upload.js';
+import NotFound from './components/Pages/NotFound/NotFound.js';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import './App.scss';
 
 
 /**
  * App Component
  * 
  * The main component of the application, serving as the root of the component tree.
- * It handles the main layout and state management for BrainFlix.
+ * This component  includes React Router setup to handle routing for different pages in the application.
  * 
- * State:
- * - mainVideo (object): The currently selected video's details.
- * - videosList (array): List of videos excluding the main video.
+ * The application's layout is structured as follows:
+ * - Header: The top navigation header, consistent across all pages.
+ * - Router: The routing mechanism that renders different components based on the URL path.
+ *   - Home: Rendered at the root path ("/").
+ *   - Upload: Rendered at the "/upload" path for video uploads.
+ *   - NotFound: A catch-all component rendered for any undefined paths, providing a 404 Not Found page.
  * 
- * Functions:
- * - selectVideo (function): Updates the state to reflect the selected video.
- * 
- * Structure:
- * - Header: The top navigation header.
- * - VideoPlayer: Displays the currently selected video.
- * - VideoDetails: Shows details of the current video (Channel, Date, Views, Likes).
- * - CommentSection: Displays comments for the current video, and includes an input area for new comments.
- * - NextVideosList: Shows a list of recommended videos.
+ * The styling for the application is managed via 'App.scss'.
  */
 
 function App() {
-
-    // State Variables initialized with default starting video ID 
-    const [mainVideo, setMainVideo] = useState(videoDetails.find(video => video.id === "84e96018-4022-434e-80bf-000ce4cd12b8"));
-    const [videosList, setVideosList] = useState(videos.filter(video => video.id !== mainVideo.id));
-
-
-    // Function to update the main video and videos list based on the selected video ID
-    const selectVideo = function (id) {
-        setMainVideo(videoDetails.find((video) => video.id === id));
-        setVideosList(videos.filter(video => video.id !== id));
-    }
 
 
     return (
@@ -49,18 +30,15 @@ function App() {
 
             <Header />
 
-            <VideoPlayer poster={mainVideo.image} video={mainVideo.video} duration={mainVideo.duration} />
+            <Router>
+                <Routes>
+                    <Route path="/upload" element={<Upload />} />
+                    <Route path="/videos/:videoId" element={<Home />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Router>
 
-            <section className='main-content'>
-                <section className='main-content__leftside'>
-                    <VideoDetails title={mainVideo.title} channel={mainVideo.channel} views={mainVideo.views} likes={mainVideo.likes} timestamp={mainVideo.timestamp} description={mainVideo.description} />
-                    <CommentSection comments={mainVideo.comments} />
-                </section>
-
-                <section className='main-content__rightside'>
-                    <NextVideosList videos={videosList} clickHandler={selectVideo} />
-                </section>
-            </section>
 
         </div>
     );

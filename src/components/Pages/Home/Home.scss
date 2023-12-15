@@ -1,0 +1,19 @@
+// ----- Home Page Styling -----
+@use './../../../styles/mixins' as *;
+
+.main-content {
+    @include desktop-breakpoint {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+
+        &__leftside {
+            width: 70%;
+        }
+
+        &__rightside {
+            width: 30%;
+        }
+    }
+}

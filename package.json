@@ -9,6 +9,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-lines-ellipsis": "^0.15.4",
+    "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
     "sass": "^1.69.5",
     "uuid": "^9.0.1",

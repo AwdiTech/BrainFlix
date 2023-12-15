@@ -32,7 +32,7 @@ function NextVideo({ id, title, channel, image, clickHandler }) {
             </div>
 
             <div className="next-video__details">
-                <h4 className="next-video__title section-header">
+                <h4 className="next-video__title">
                     <LinesEllipsis
                         text={title}
                         maxLine={2}

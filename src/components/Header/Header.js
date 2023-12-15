@@ -14,6 +14,12 @@ import './Header.scss';
 
 function Header() {
 
+    const navigate = useNavigate
+
+    const gotoUploadPage = function () {
+
+    }
+
     return (
         <header className="main-nav">
 
