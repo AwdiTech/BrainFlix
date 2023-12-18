@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import VideoPlayer from '../../VideoPlayer/VideoPlayer.js';
-import VideoDetails from '../../VideoDetails/VideoDetails.js';
-import CommentSection from '../../Comments/CommentSection.js';
-import NextVideosList from '../../VideoRecommendations/NextVideosList.js';
+import VideoPlayer from '../../components/VideoPlayer/VideoPlayer.js';
+import VideoDetails from '../../components/VideoDetails/VideoDetails.js';
+import CommentSection from '../../components/Comments/CommentSection.js';
+import NextVideosList from '../../components/VideoRecommendations/NextVideosList.js';
 import './Home.scss';
 
 
