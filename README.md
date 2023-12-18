@@ -1,6 +1,8 @@
 # BrainFlix
 
-![BrainFlix Interface](https://i.imgur.com/p9DvIfp.png)
+*--Will Update this README as the project develops--*
+
+![BrainFlix Interface](https://i.imgur.com/8EoV4DH.png)
 
 ## Overview
 BrainFlix is a dynamic video streaming platform designed to deliver a seamless viewing experience. It features a user-friendly interface, personalized content discovery, and a suite of interactive functionalities that cater to both content creators and viewers.
@@ -15,8 +17,9 @@ BrainFlix is a dynamic video streaming platform designed to deliver a seamless v
 - React.js
 - Node.js
 - SCSS
-- JSON Server (for mock backend)
-- Other libraries: [List any significant libraries/frameworks]
+- `react-lines-ellipsis` for multiline text truncation
+
+
 
 ## Getting Started
 
