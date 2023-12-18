@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
  * 
  * Structure:
  * - <form>: The form element that wraps all the input fields and buttons.
- * - <header>
+ * - <header>: Upload Page Title
  * - <section className='upload-details'>: Contains the thumbnail and video details input elements.
  * - <section className='upload-options'>: Contains the action buttons for publishing or cancelling the video upload.
  * 

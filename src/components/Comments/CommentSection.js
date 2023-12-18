@@ -14,12 +14,16 @@ import './CommentSection.scss';
  * - comments (array): Array of comment objects to be displayed.
  */
 
-function CommentSection({ comments, postComment }) {
+function CommentSection({ comments, postComment, deleteComment }) {
 
     const commentSubmitHandler = function (event) {
         event.preventDefault();
         const newCommentObject = { name: "Username", comment: event.target.comment.value};
         postComment(newCommentObject, event.target);
+    }
+
+    const deleteCommentHandler = function (commentId) {
+        deleteComment(commentId);
     }
 
     
@@ -43,7 +47,7 @@ function CommentSection({ comments, postComment }) {
             </form>
 
             <section className="comments-list">
-                {comments.map((commentObject) => <Comment key={commentObject.id} {...commentObject} />)}
+                { comments.map((commentObject) => <Comment key={commentObject.id} {...commentObject} deleteCommentHandler={deleteCommentHandler} /> ) }
             </section>
 
         </section>

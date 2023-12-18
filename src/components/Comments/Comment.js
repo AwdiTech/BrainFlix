@@ -1,5 +1,6 @@
 import './Comment.scss';
-import { TimeAgoContext } from '../../context/TimeAgoContext';
+import { TimeAgoContext } from './../../context/TimeAgoContext';
+import deleteIcon from './../../assets/Icons/icon-delete.svg';
 import { useContext } from 'react';
 
 /**
@@ -17,7 +18,7 @@ import { useContext } from 'react';
  */
 
 
-function Comment({ name, comment, timestamp }) {
+function Comment({ id, name, comment, timestamp, deleteCommentHandler }) {
 
     const calculateTimeAgo = useContext(TimeAgoContext)
 
@@ -32,6 +33,7 @@ function Comment({ name, comment, timestamp }) {
                 <p className="comment-body__name">{name}</p>
                 <p className="comment-body__text">{comment}</p>
                 <p className="comment-body__date">{calculateTimeAgo(timestamp)}</p>
+                <img src={deleteIcon} alt='delete icon' className='comment-body__delete' onClick={() => deleteCommentHandler(id)} />
             </div>
             
         </article>

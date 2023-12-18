@@ -109,6 +109,10 @@
             @include tablet-breakpoint {
                 bottom: 0.5rem;
             }
+
+            @include desktop-breakpoint {
+                right: 5.5%;
+            }
         }
 
     }

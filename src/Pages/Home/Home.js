@@ -1,3 +1,37 @@
+/**
+ * Home Component
+ * 
+ * The Home component is the central page of the application, showcasing the main video 
+ * content alongside detailed information and related video recommendations.
+ * 
+ * Features:
+ * - Dynamically fetches and displays video details and a list of recommended videos.
+ * - Allows users to post new comments (postComment) and delete existing comments (deleteComment) on the main video.
+ * 
+ * State Management:
+ * - mainVideo: Holds the details of the currently selected video.
+ * - videosList: Contains a list of recommended videos, excluding the main video.
+ * - error: Tracks any errors that occur during data fetching.
+ * - comments: Manages the list of comments for the main video.
+ * 
+ * API Integration:
+ * - Utilizes Axios for API requests to fetch video details and manage comments.
+ * 
+ * Functions:
+ * - postComment: Submits a new comment to the selected video.
+ * - deleteComment: Removes a selected comment from the selected video.
+ * 
+ * Component Structure:
+ * - VideoPlayer: Renders the video player for the selected video.
+ * - VideoDetails: Displays detailed information about the main video.
+ * - CommentSection: Handles the display and interaction of comments.
+ * - NextVideosList: Shows a list of recommended videos.
+ * 
+ * @module Home
+ */
+
+
+// Imports and Constants
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -9,28 +43,6 @@ import NextVideosList from '../../components/VideoRecommendations/NextVideosList
 import './Home.scss';
 
 
-
-/**
- * Home Component
- * 
- * This component serves as the Home page for the application, responsible for rendering the main video content along with associated details and recommendations.
- * 
- * State Management:
- * - The component maintains its own state for the currently selected main video (`mainVideo`) and a list of other recommended videos (`videosList`).
- * - State is initialized with a default starting video, and the list of videos excludes the main video.
- * 
- * Functionalities:
- * - `selectVideo`: A function to update the `mainVideo` based on the selected video ID. This also updates the `videosList` to reflect the change.
- * 
- * Structure:
- * - VideoPlayer: Displays the currently selected video.
- * - VideoDetails: Shows details of the current video (title, channel, views, likes, timestamp, and description).
- * - CommentSection: Manages comments for the current video, including display and new comment input area.
- * - NextVideosList: Provides a list of recommended videos, which updates the main video view on selection.
- * 
- */
-
-//Constants
 const DEFAULT_VIDEO_ID = "84e96018-4022-434e-80bf-000ce4cd12b8";
 const API_KEY = "3cbff5a7-5a14-46bc-a661-53871ee9b327";
 const API_URL = "https://project-2-api.herokuapp.com";
@@ -38,7 +50,7 @@ const API_URL = "https://project-2-api.herokuapp.com";
 
 function Home() {
 
-    // State Variables
+    // -----State Variables-----
     const [mainVideo, setMainVideo] = useState(null);
     const [videosList, setVideosList] = useState(null);
     const [error, setError] = useState(null);
@@ -46,17 +58,27 @@ function Home() {
     
     const { videoId } = useParams();
 
-    // Data retrieval from Back End with Axios
-    // useEffect is used to fetch video details and list of videos initially, and whenever the videoId changes.
+    
+    // -----UseEffect Hooks-----
+    
+    /**
+     * Fetches video data and updates state accordingly.
+     * Handles both initial data loading and updates based on videoId changes.
+     */
     useEffect(() => {
         const fetchVideoData = async function () {
             try {
                 const videosResponse = axios.get(`${API_URL}/videos?api_key=${API_KEY}`)
                 const videoDetailsResponse = axios.get(`${API_URL}/videos/${videoId ? videoId : DEFAULT_VIDEO_ID}?api_key=${API_KEY}`)
                 const [videos, videoDetails] = await Promise.all([videosResponse, videoDetailsResponse]); //This allows both GET requests to run simultaneously, and awaits until they both completed
-
-                setVideosList(videos.data.filter(video => video.id !== videoId));
                 setMainVideo(videoDetails.data);
+
+                if (videoId) {
+                setVideosList(videos.data.filter(video => video.id !== videoId));
+                } else {
+                    setVideosList(videos.data.filter(video => video.id !== DEFAULT_VIDEO_ID));
+                }
+                
             } catch (err) {
                 console.log("Error encountered:", err);
                 setError("Sorry, we're having trouble loading this content. Please try again later.");
@@ -67,24 +89,29 @@ function Home() {
     }, [videoId]); // Dependency array includes videoId to trigger re-fetching of data when it changes.
 
 
-    //This useEffect updates comments when mainVideo changes.
+    /**
+     * Updates the comments state when the main video changes.
+     * Sorts comments by most recent using their timestamp.
+     */
     useEffect( () => {
         if (mainVideo) {
-        setComments(mainVideo.comments);
+        setComments([...mainVideo.comments].sort((a, b) => b.timestamp - a.timestamp));
         }
     }, [mainVideo]);
 
 
-    // Post Comment with API Function
+    // -----Functions-----
+    
+    // `postComment`: Posts a new comment to the backend and updates the local comments state.
     const postComment = function (newCommentObject, formElement) {
         axios.post(`${API_URL}/videos/${mainVideo.id}/comments?api_key=${API_KEY}`, newCommentObject)
         .then( (response) => {
             alert("Comment Posted Successfully!");
             const responseCommentObject = response.data;
-            setComments( (currentComments) => [...currentComments, responseCommentObject]); 
+            setComments( (currentComments) => [responseCommentObject, ...currentComments] ); 
             formElement.reset();
                 // Used a functional update here to avoid stale state.
-                // Adding the newCommentObject into a new separate comments state variable to avoid
+                // Added the newCommentObject into a new separate comments state variable to avoid
                 //   making another API call, and in order to only trigger re-rendering for just the CommentSection. 
         })
         .catch ( (error) => {
@@ -93,7 +120,21 @@ function Home() {
         })
     }
 
+    // `deleteComment`: Deletes a comment from the backend and updates the local comments state.
+    const deleteComment = function(commentId) {
+        axios.delete(`${API_URL}/videos/${mainVideo.id}/comments/${commentId}?api_key=${API_KEY}`)
+        .then( () => {
+            alert("Comment Deleted Successfully!");
+            setComments( (currentComments) => currentComments.filter( (comment) => comment.id !== commentId) );
+        })
+        .catch( (error) => {
+            alert("Error: Failed to Delete Comment! Please try again later.");
+            console.error("Error:", error);
+        })
+    }
 
+
+    // -----Render Screens - Error Screen, Loading Screen, Successful Loading Screen
 
     // Error Screen (Styled using tailwindcss)
     if (error) {
@@ -136,7 +177,7 @@ function Home() {
                         timestamp={mainVideo.timestamp}
                         description={mainVideo.description}
                     />
-                    <CommentSection comments={comments} postComment={postComment} />
+                    <CommentSection comments={comments} postComment={postComment} deleteComment={deleteComment} />
                 </section>
 
                 <section className='main-content__rightside'>
