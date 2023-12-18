@@ -41,9 +41,9 @@ function Home() {
     // State Variables
     const [mainVideo, setMainVideo] = useState(null);
     const [videosList, setVideosList] = useState(null);
-    const { videoId } = useParams();
     const [error, setError] = useState(null);
-
+    
+    const { videoId } = useParams();
 
     // Data retrieval from Back End with Axios
     // useEffect is used to fetch video details and list of videos initially, and whenever the videoId changes.

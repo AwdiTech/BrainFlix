@@ -16,12 +16,16 @@ import './CommentSection.scss';
 
 function CommentSection({ comments }) {
 
+    const commentSubmitHandler = function (event) {
+        event.preventDefault();
+    }
+
     return (
         <section className="comment-section">
 
             <h4 className="comment-section__count subheader">{comments.length} Comments</h4>
 
-            <section className="input-comment">
+            <form className="input-comment" onSubmit={commentSubmitHandler}>
                 <img className="input-comment__user user-icon" src={userIcon} alt="" />
                 <div className="input-comment__main">
                     <label className="input-comment__label special-label" htmlFor="comment">JOIN THE CONVERSATION</label>
@@ -33,7 +37,7 @@ function CommentSection({ comments }) {
                         </button>
                     </div>
                 </div>
-            </section>
+            </form>
 
             <section className="comments-list">
                 {comments.map((commentObject) => <Comment key={uuidv4()} {...commentObject} />)}

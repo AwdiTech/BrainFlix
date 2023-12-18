@@ -1,0 +1,197 @@
+// ----- Upload Styling -----
+
+@use './../../../styles/mixins' as *;
+@use './../../../styles/variables' as *;
+
+.upload {
+
+    &-form {
+        padding: 0 1rem 2rem;
+
+        @include tablet-breakpoint {
+            padding: 0 2.5rem 2rem;
+        }
+
+        @include desktop-breakpoint {
+            padding: 0 0 2rem;
+        }
+    }
+
+    &__header {
+        border-top: 1px solid $mercury;
+        padding: 1.425rem 0 1.25rem;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 600;
+
+        @include tablet-breakpoint {
+            padding: 2.25rem 0 1.35rem;
+            font-weight: 700;
+            font-size: 33px;
+            line-height: 44px;
+        } 
+
+        @include desktop-breakpoint {
+            padding: 2.5rem 8.75rem 1.5rem;
+        }
+    }
+
+    &-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        @include tablet-breakpoint {
+            border-top: 1px solid $mercury;
+            flex-direction: row-reverse;
+            padding-top: 1.5rem;
+        }
+        @include desktop-breakpoint {
+            margin: 0 8.75rem;
+        }
+
+
+        &__upload-button {
+            position: relative;
+        }
+    }
+}
+
+.upload-details {
+    
+    @include tablet-breakpoint {
+        border-top: 1px solid $mercury;
+    }
+
+    @include desktop-breakpoint {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        padding: 1.75rem 0 1rem;
+        gap: 1rem;
+        margin: 0 8.75rem;
+    }
+}
+
+.thumbnail {
+    border-radius: 8px;
+    overflow: hidden;
+
+    @include desktop-breakpoint {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 33.4%;
+        margin-bottom: 1.5rem;
+    }
+
+
+    &__image {
+        display: block;
+        width: 100%;
+        height: auto; 
+        border-radius: 8px; 
+
+        @include tablet-breakpoint {
+            width: 50%;
+        }
+
+        @include desktop-breakpoint {
+            width: 100%;
+            object-fit: contain; 
+            border-radius: 4px;
+        }
+    }
+
+    &__label {
+        margin-bottom: 0.25rem;
+
+        @include tablet-breakpoint {
+            margin-top: 1.5rem;
+        }
+
+        @include desktop-breakpoint{
+            margin: 0 0 0rem;
+        }
+    }
+}
+
+.input-video-details {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0 0.25rem;
+
+    @include desktop-breakpoint {
+        width: 66.6%;
+        padding: 0;
+    }
+
+
+    &__title-field {
+        height: 36px;
+
+        @include desktop-breakpoint {
+            height: 2.5rem;
+        }
+    }
+
+    &__description-field {
+        resize: none;
+
+        @include desktop-breakpoint {
+            height: 6rem;
+        }
+    }
+
+    &__title-label, &__description-label {
+        font-size: 13px;
+        text-shadow: 0.1px 0.1px 0.25px $silver; // horizontal shadow, vertical shadow, blur radius, color
+        margin-bottom: 0.25rem;
+
+        @include desktop-breakpoint {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.input-field {
+    margin-bottom: 1.25rem; 
+    border-radius: 4px;
+    min-height: 36px;
+    border: 1px solid $mercury;
+    padding: 12px;
+    background-color: $alabaster;
+
+    @include tablet-breakpoint {
+        margin-bottom: 1.25rem;
+    }
+    @include desktop-breakpoint {
+        margin-bottom: 1.5rem;
+    }
+
+    &::placeholder {
+        color: $brainflix-darkblack;
+        font-size: 0.85rem;
+    }
+
+    &:focus {
+        outline: none;
+        border: 2px solid $brainflix-blue;
+    }
+
+    &--error {
+        border: 1px solid #D22D2D;
+    }
+}
+
+#cancel-button {
+    background-color: $white;
+    color: $brainflix-blue;
+}
+
+.publish-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}

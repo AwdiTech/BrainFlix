@@ -25,7 +25,7 @@ function Header() {
         <header className="main-nav">
 
             <div className='main-nav__logo-container'>
-                <Link to='/'><img className="main-nav__logo bf-logo" src={logo} alt="" /></Link> {/*BrainFlix Logo*/}
+                <Link className='main-nav__logo-link-wrapper' to='/'><img className="main-nav__logo bf-logo" src={logo} alt="" /></Link> {/*BrainFlix Logo*/}
             </div>
 
             <div className="main-nav__search-bar">
