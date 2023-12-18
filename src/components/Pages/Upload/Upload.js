@@ -28,9 +28,9 @@ function Upload() {
                 </article>
 
                 <article className='input-video-details'>
-                    <label className='input-video-details__title-label special-label' for="video-title">TITLE YOUR VIDEO</label>
+                    <label className='input-video-details__title-label special-label' htmlFor="video-title">TITLE YOUR VIDEO</label>
                     <input className='input-video-details__title-field input-field' type='text' name='video-title' placeholder='Add a title to your video' />
-                    <label className='input-video-details__description-label special-label' for="video-description">ADD A VIDEO DESCRIPTION</label>
+                    <label className='input-video-details__description-label special-label' htmlFor="video-description">ADD A VIDEO DESCRIPTION</label>
                     <textarea className='input-video-details__description-field input-field' name="video-description" placeholder='Add a description to your video' rows='4'/>
                 </article>
             </section>

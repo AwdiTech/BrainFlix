@@ -42,6 +42,7 @@ function Home() {
     const [mainVideo, setMainVideo] = useState(null);
     const [videosList, setVideosList] = useState(null);
     const [error, setError] = useState(null);
+    const [comments, setComments] = useState([]);
     
     const { videoId } = useParams();
 
@@ -66,6 +67,33 @@ function Home() {
     }, [videoId]); // Dependency array includes videoId to trigger re-fetching of data when it changes.
 
 
+    //This useEffect updates comments when mainVideo changes.
+    useEffect( () => {
+        if (mainVideo) {
+        setComments(mainVideo.comments);
+        }
+    }, [mainVideo]);
+
+
+    // Post Comment with API Function
+    const postComment = function (newCommentObject, formElement) {
+        axios.post(`${API_URL}/videos/${mainVideo.id}/comments?api_key=${API_KEY}`, newCommentObject)
+        .then( (response) => {
+            alert("Comment Posted Successfully!");
+            const responseCommentObject = response.data;
+            setComments( (currentComments) => [...currentComments, responseCommentObject]); 
+            formElement.reset();
+                // Used a functional update here to avoid stale state.
+                // Adding the newCommentObject into a new separate comments state variable to avoid
+                //   making another API call, and in order to only trigger re-rendering for just the CommentSection. 
+        })
+        .catch ( (error) => {
+            alert("Error: Failed to post comment. Please try again later.");
+            console.error("Error:", error);
+        })
+    }
+
+
 
     // Error Screen (Styled using tailwindcss)
     if (error) {
@@ -78,7 +106,7 @@ function Home() {
     }
 
     // Loading Screen (Styled using tailwindcss)
-    if (!mainVideo || !videosList) {
+    if (!mainVideo || !videosList || !comments) {
         return (
             <>
                 <div className="flex items-center justify-center space-x-3 mt-60">
@@ -108,7 +136,7 @@ function Home() {
                         timestamp={mainVideo.timestamp}
                         description={mainVideo.description}
                     />
-                    <CommentSection comments={mainVideo.comments} />
+                    <CommentSection comments={comments} postComment={postComment} />
                 </section>
 
                 <section className='main-content__rightside'>
