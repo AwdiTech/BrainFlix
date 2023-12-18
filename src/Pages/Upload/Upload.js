@@ -1,7 +1,26 @@
 import './Upload.scss';
-import thumbnailPicture from './../../../assets/images/Upload-video-preview.jpg';
-import publishIcon from './../../../assets//Icons/publish.svg';
+import thumbnailPicture from './../../assets/images/Upload-video-preview.jpg';
+import publishIcon from './../../assets/Icons/publish.svg';
 import { useNavigate } from 'react-router-dom';
+
+/**
+ * Upload Component
+ * 
+ * This component serves as the Upload page for the application, where users can submit their videos.
+ * 
+ * Functions:
+ * - `uploadButtonHandler`: A function triggered when the user clicks the 'Publish' button.
+ *   It prevents the default form submission event, displays a success alert, and navigates the user back to the home page.
+ * - `cancelButtonHandler`: A function triggered when the user clicks the 'Cancel' button.
+ *   It prevents the default button click event, displays a cancellation alert, and redirects the user back to the home page.
+ * 
+ * Structure:
+ * - <form>: The form element that wraps all the input fields and buttons.
+ * - <header>
+ * - <section className='upload-details'>: Contains the thumbnail and video details input elements.
+ * - <section className='upload-options'>: Contains the action buttons for publishing or cancelling the video upload.
+ * 
+ */
 
 
 function Upload() {
@@ -11,6 +30,12 @@ function Upload() {
     const uploadButtonHandler = function (event) {
         event.preventDefault();
         alert("Video Successfully Uploaded!");
+        navigate('/');
+    }
+
+    const cancelButtonHandler = function (event) {
+        event.preventDefault();
+        alert("Video Uploading Cancelled... Redirecting to Home Page...");
         navigate('/');
     }
 
@@ -40,7 +65,7 @@ function Upload() {
                 <img src={publishIcon} alt="" className='publish-icon style-icon' />
                 PUBLISH
                 </button>
-                <button className='upload-options__cancel-button cta-button' id='cancel-button'>CANCEL</button>
+                <button className='upload-options__cancel-button cta-button' id='cancel-button' onClick={cancelButtonHandler}>CANCEL</button>
             </section>
         </form>
 

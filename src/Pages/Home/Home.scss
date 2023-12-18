@@ -1,5 +1,5 @@
 // ----- Home Page Styling -----
-@use './../../../styles/mixins' as *;
+@use './../../styles/mixins' as *;
 
 .main-content {
     @include desktop-breakpoint {
