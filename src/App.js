@@ -10,7 +10,7 @@ import './App.scss';
  * App Component
  * 
  * The main component of the application, serving as the root of the component tree.
- * This component  includes React Router setup to handle routing for different pages in the application.
+ * This component includes React Router setup to handle routing for different pages in the application.
  * 
  * The application's layout is structured as follows:
  * - Header: The top navigation header, consistent across all pages.

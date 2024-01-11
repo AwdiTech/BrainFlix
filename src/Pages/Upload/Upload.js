@@ -39,7 +39,6 @@ function Upload() {
         navigate('/');
     }
 
-
     return (
         <form className='upload-form'>
             <header className='upload__header'>
@@ -49,12 +48,12 @@ function Upload() {
             <section className='upload-details'>
                 <article className='thumbnail'>
                     <p className='thumbnail__label special-label'>VIDEO THUMBNAIL</p>
-                    <img className='thumbnail__image' src={thumbnailPicture} ></img>
+                    <img className='thumbnail__image' src={thumbnailPicture} alt='Upload Image Thumbnail' />
                 </article>
 
                 <article className='input-video-details'>
                     <label className='input-video-details__title-label special-label' htmlFor="video-title">TITLE YOUR VIDEO</label>
-                    <input className='input-video-details__title-field input-field' type='text' name='video-title' placeholder='Add a title to your video' />
+                    <input className='input-video-details__title-field input-field' type='text' name='video-title' placeholder='Add a title to your video' autofocus />
                     <label className='input-video-details__description-label special-label' htmlFor="video-description">ADD A VIDEO DESCRIPTION</label>
                     <textarea className='input-video-details__description-field input-field' name="video-description" placeholder='Add a description to your video' rows='4'/>
                 </article>

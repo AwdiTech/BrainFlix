@@ -1,7 +1,6 @@
 import Comment from './Comment';
 import userIcon from './../../assets/images/Mohan-muruge.jpg';
 import commentIcon from './../../assets/Icons/add_comment.svg';
-import { v4 as uuidv4 } from 'uuid';
 import './CommentSection.scss';
 
 /**

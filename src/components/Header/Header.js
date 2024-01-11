@@ -30,7 +30,7 @@ function Header() {
 
             <div className="main-nav__search-bar">
                 <img src={searchIcon} className="main-nav__search-icon" alt="" />
-                <input type="text" placeholder="Search" className="main-nav__search-input" />
+                <input type="text" placeholder="Search" className="main-nav__search-input" />   {/* CHANGE THIS INPUT TO TYPE SEARCH AND PUT FORM AROUND IT? */}
             </div>
 
             <div className='main-nav__user-icon-container'>

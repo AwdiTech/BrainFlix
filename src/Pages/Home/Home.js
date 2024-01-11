@@ -66,10 +66,17 @@ function Home() {
      * Handles both initial data loading and updates based on videoId changes.
      */
     useEffect(() => {
+        const cancelTokenSource = axios.CancelToken.source();
+
         const fetchVideoData = async function () {
             try {
-                const videosResponse = axios.get(`${API_URL}/videos?api_key=${API_KEY}`)
-                const videoDetailsResponse = axios.get(`${API_URL}/videos/${videoId ? videoId : DEFAULT_VIDEO_ID}?api_key=${API_KEY}`)
+                const videosResponse = axios.get(`${API_URL}/videos?api_key=${API_KEY}`, { 
+                    cancelToken: cancelTokenSource.token 
+                });
+                const videoDetailsResponse = axios.get(`${API_URL}/videos/${videoId ? videoId : DEFAULT_VIDEO_ID}?api_key=${API_KEY}`, { 
+                    cancelToken: cancelTokenSource.token 
+                });
+
                 const [videos, videoDetails] = await Promise.all([videosResponse, videoDetailsResponse]); //This allows both GET requests to run simultaneously, and awaits until they both completed
                 setMainVideo(videoDetails.data);
 
@@ -86,6 +93,9 @@ function Home() {
         }
 
         fetchVideoData ();
+
+        return () => cancelTokenSource.cancel("Component unmounted, API request cancelled"); // Cleanup to cancel in-progress API calls
+        
     }, [videoId]); // Dependency array includes videoId to trigger re-fetching of data when it changes.
 
 
@@ -102,7 +112,7 @@ function Home() {
 
     // -----Functions-----
     
-    // `postComment`: Posts a new comment to the backend and updates the local comments state.
+    // `postComment`: Posts a new comment to the backend and updates the local comments state and render without making another API call.
     const postComment = function (newCommentObject, formElement) {
         axios.post(`${API_URL}/videos/${mainVideo.id}/comments?api_key=${API_KEY}`, newCommentObject)
         .then( (response) => {
@@ -111,7 +121,7 @@ function Home() {
             setComments( (currentComments) => [responseCommentObject, ...currentComments] ); 
             formElement.reset();
                 // Used a functional update here to avoid stale state.
-                // Added the newCommentObject into a new separate comments state variable to avoid
+                // Added the newCommentObject into a new separate 'comments' state variable to avoid
                 //   making another API call, and in order to only trigger re-rendering for just the CommentSection. 
         })
         .catch ( (error) => {
