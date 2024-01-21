@@ -19,6 +19,13 @@ BrainFlix is a dynamic video streaming platform designed to deliver a seamless v
 - SCSS
 - `react-lines-ellipsis` for multiline text truncation
 
+## API Server (New in Sprint 3)
+The BrainFlix API manages the video data, allowing for features such as:
+- Video list retrieval.
+- Individual video details.
+- Video uploads and comment management.
+- Static asset serving for thumbnails and video content.
+
 
 
 ## Getting Started
@@ -59,4 +66,8 @@ BrainFlix offers a straightforward and intuitive user interface that makes it ea
 
 
 
-
+## Sprint 3 Enhancements
+Developed a robust backend API to replace the mock API previously in use.
+Implemented full CRUD operations for video and comment management.
+Introduced a custom video player with a suite of controls for an improved user experience.
+Established persistent data storage to maintain state between server restarts.
