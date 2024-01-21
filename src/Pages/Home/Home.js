@@ -40,7 +40,7 @@ import './Home.scss';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
-const API_KEY = process.env.REACT_APP_API_KEY;
+//const API_KEY = process.env.REACT_APP_API_KEY;
 const DEFAULT_VIDEO_ID = "84e96018-4022-434e-80bf-000ce4cd12b8";
 
 
@@ -139,7 +139,7 @@ function Home() {
     //Successful Home and Video Page Screen
     return (
         <>
-            <VideoPlayer poster={mainVideo.image} video={mainVideo.video} duration={mainVideo.duration} />
+            <VideoPlayer poster={mainVideo.image} video={mainVideo.video} />
 
             <section className='main-content'>
                 <section className='main-content__leftside'>

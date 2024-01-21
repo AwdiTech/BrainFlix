@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import playIcon from './../../assets/Icons/play.svg';
 import pauseIcon from './../../assets/Icons/pause.svg';
 import scrubIcon from './../../assets/Icons/scrub.svg';
@@ -36,7 +36,7 @@ function VideoPlayer({ poster, video }) {
     // State hooks for various video player functionalities
 
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+    //const [isFullscreen, setIsFullscreen] = useState(false);
     const [volume, setVolume] = useState(1);
     const [showVolumeSlider, setShowVolumeSlider] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
@@ -51,6 +51,14 @@ function VideoPlayer({ poster, video }) {
     const videoContainerRef = useRef(null);
 
     let isUsingVolume = false;
+
+
+    useEffect(() => {
+        // If the video element exists and the video source has changed
+        if (videoRef.current && video) {
+            videoRef.current.load();
+        }
+    }, [video]); // Watch for changes in the video prop
 
 
     // ----- EVENT HANDLER FUNCTIONS ----- For video player controls
@@ -126,7 +134,7 @@ function VideoPlayer({ poster, video }) {
                 } else if (videoRef.current.msRequestFullscreen) { /* IE/Edge */
                     videoRef.current.msRequestFullscreen();
                 }
-                setIsFullscreen(true);
+                //setIsFullscreen(true);
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -137,7 +145,7 @@ function VideoPlayer({ poster, video }) {
                 } else if (document.msExitFullscreen) { /* IE/Edge */
                     document.msExitFullscreen();
                 }
-                setIsFullscreen(false);
+                //setIsFullscreen(false);
             }
         }
     };
@@ -208,13 +216,13 @@ function VideoPlayer({ poster, video }) {
         <section className="video-player__wrapper" ref={videoContainerRef} >
 
             {/* Video element with reference and event handlers */}
-            <video className="video-player" 
+            <video className="video-player"
                 ref={videoRef}
-                width="100%" 
-                height="auto" 
-                poster={process.env.REACT_APP_API_URL + poster} 
-                onClick={togglePlayPause} 
-                onTimeUpdate={handleTimeUpdate} 
+                width="100%"
+                height="auto"
+                poster={process.env.REACT_APP_API_URL + poster}
+                onClick={togglePlayPause}
+                onTimeUpdate={handleTimeUpdate}
             >
                 <source src={process.env.REACT_APP_API_URL + video} type='video/mp4' />
             </video>
@@ -225,28 +233,28 @@ function VideoPlayer({ poster, video }) {
 
                 {/* Play/Pause Buttons */}
                 <div className='play-pause-wrapper' onClick={togglePlayPause}>
-                    <img src={playIcon} className={`video-controls__play ${isPlaying ? 'hidden' : ''}`} />
-                    <img src={pauseIcon} className={`video-controls__pause ${!isPlaying ? 'hidden' : ''}`} />
+                    <img src={playIcon} className={`video-controls__play ${isPlaying ? 'hidden' : ''}`} alt='play'/>
+                    <img src={pauseIcon} className={`video-controls__pause ${!isPlaying ? 'hidden' : ''}`} alt='pause'/>
                 </div>
 
                 {/* Progress bar with scrubbing functionality */}
                 <div className='progress-wrapper'>
                     <div className='progress' ref={progressBarRef} onMouseDown={handleMouseDownOnProgress}>
                         <div className='progress__filled' style={{ width: `${progress}%` }}></div>
-                        <img src={scrubIcon} className='scrubber' style={{ left: `${progress}%` }} />
+                        <img src={scrubIcon} className='scrubber' style={{ left: `${progress}%` }} alt='progress scrubber'/>
                     </div>
                     <div className='video-controls__time'>{currentTime} / {duration}</div>
                 </div>
 
                 {/* Utility Buttons including Fullscreen toggle and Volume Control*/}
                 <div className='utility-buttons-wrapper'>
-                    <img src={fullscreenIcon} className='video-controls__close-fullscreen' onClick={toggleFullscreen} />
+                    <img src={fullscreenIcon} className='video-controls__close-fullscreen' onClick={toggleFullscreen} alt='fullscreen toggle'/>
 
                     <div className='volume-wrapper' onMouseOver={volumeHoverHandler} onMouseLeave={exitVolumeHoverHandler}>
                         {isMuted ? (
-                            <img src={volumeOffIcon} className='video-controls__volume-off' onClick={toggleMute} />
+                            <img src={volumeOffIcon} className='video-controls__volume-off' onClick={toggleMute} alt='volume off'/>
                         ) : (
-                            <img src={volumeIcon} className='video-controls__volume-up' onClick={toggleMute} />
+                            <img src={volumeIcon} className='video-controls__volume-up' onClick={toggleMute} alt='volume'/>
                         )}
 
                         <div className='volume-slider'

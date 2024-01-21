@@ -39,7 +39,6 @@ function VideoDetails({ videoId, title, channel, views, likes, timestamp, descri
     const likeVideoHandler = function () {
         axios.put(`${API_URL}/videos/${videoId}/likes`)
             .then((response) => {
-                console.log(response.data);
                 setLikesState(response.data); // I update the like count client-side to avoid making another API call.
                 setLiked(true);
             })
