@@ -2,6 +2,8 @@ import Comment from './Comment';
 import userIcon from './../../assets/images/Mohan-muruge.jpg';
 import commentIcon from './../../assets/Icons/add_comment.svg';
 import './CommentSection.scss';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 /**
  * CommentSection Component
@@ -9,23 +11,69 @@ import './CommentSection.scss';
  * Renders a section for displaying and adding comments. It includes an input area for new comments
  * and a list of existing comments.
  * 
+ * Functions:
+ * - postComment: Submits a new comment to the selected video.
+ * - deleteComment: Removes a selected comment from the selected video.
+ * - likeComment: Increments the like count for a selected comment.
+ * 
  * Props:
  * - comments (array): Array of comment objects to be displayed.
  */
 
-function CommentSection({ comments, postComment, deleteComment }) {
+function CommentSection({ comments, setComments, mainVideoId }) {
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
 
     const commentSubmitHandler = function (event) {
         event.preventDefault();
-        const newCommentObject = { name: "Username", comment: event.target.comment.value};
+        const newCommentObject = { id: uuidv4(), name: "Username", comment: event.target.comment.value, likes: 0, timestamp: Date.now() };
         postComment(newCommentObject, event.target);
     }
 
-    const deleteCommentHandler = function (commentId) {
-        deleteComment(commentId);
+
+    // `postComment`: Posts a new comment to the backend and updates the local comments state and render without making another API call.
+    const postComment = function (newCommentObject, formElement) {
+        axios.post(`${API_URL}/videos/${mainVideoId}/comments`, newCommentObject)
+            .then((response) => {
+                alert("Comment Posted Successfully!");
+                const responseCommentObject = response.data;
+                setComments((currentComments) => [responseCommentObject, ...currentComments]);
+                formElement.reset();
+            })
+            .catch((error) => {
+                alert("Error: Failed to post comment. Please try again later.");
+                console.error("Error:", error);
+            })
     }
 
-    
+
+    // `deleteComment`: Deletes a comment from the backend and updates the local comments state.
+    const deleteComment = function (commentId) {
+        axios.delete(`${API_URL}/videos/${mainVideoId}/comments/${commentId}`)
+            .then(() => {
+                alert("Comment Deleted Successfully!");
+                setComments((currentComments) => currentComments.filter((comment) => comment.id !== commentId));
+            })
+            .catch((error) => {
+                alert("Error: Failed to Delete Comment! Please try again later.");
+                console.error("Error:", error);
+            })
+    }
+
+    const likeCommentHandler = function (commentId, setLikes) {
+        axios.put(`${API_URL}/videos/${mainVideoId}/comments/${commentId}/likes`)
+            .then((response) => {
+                console.log(response.data);
+                setLikes(response.data); // I update the like count client-side to avoid making another API call.
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+
+
+
     return (
         <section className="comment-section">
 
@@ -46,7 +94,12 @@ function CommentSection({ comments, postComment, deleteComment }) {
             </form>
 
             <section className="comments-list">
-                { comments.map((commentObject) => <Comment key={commentObject.id} {...commentObject} deleteCommentHandler={deleteCommentHandler} /> ) }
+                {comments.map((commentObject) => <Comment
+                    key={commentObject.id}
+                    {...commentObject}
+                    deleteCommentHandler={deleteComment}
+                    likeCommentHandler={likeCommentHandler}
+                />)}
             </section>
 
         </section>

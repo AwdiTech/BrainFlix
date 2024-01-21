@@ -7,10 +7,10 @@
     display: flex;
     position: relative;
     border-top: 1px solid $mercury;
-    padding: 1rem 0;
+    padding: 1rem 0 1.75rem;
     
     @include tablet-breakpoint {
-        padding: 1.75rem 0 1rem;
+        padding: 1.75rem 0 1.75rem;
     }
     @include desktop-breakpoint {
         padding-right: 2rem;
@@ -109,9 +109,34 @@
             @include tablet-breakpoint {
                 bottom: 0.5rem;
             }
-
             @include desktop-breakpoint {
                 right: 5.5%;
+            }
+        }
+
+        &__likes {
+            position: absolute;
+            bottom: 0.4rem;
+            right: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+
+
+            @include tablet-breakpoint {
+                bottom: 0.5rem;
+            }
+            @include desktop-breakpoint {
+                right: 10%;
+            }
+
+            &-count {
+                margin-bottom: -0.25rem;
+                font-size: 0.8rem;
+                color: green;
             }
         }
 
