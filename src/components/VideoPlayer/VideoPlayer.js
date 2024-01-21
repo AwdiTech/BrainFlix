@@ -210,8 +210,9 @@ function VideoPlayer({ poster, video }) {
         }, 1200);
     };
 
+    
 
-    // JSX for rendering the video player component
+    // ----- JSX for rendering the video player component -----
     return (
         <section className="video-player__wrapper" ref={videoContainerRef} >
 

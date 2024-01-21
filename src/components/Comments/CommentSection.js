@@ -64,7 +64,6 @@ function CommentSection({ comments, setComments, mainVideoId }) {
     const likeCommentHandler = function (commentId, setLikes) {
         axios.put(`${API_URL}/videos/${mainVideoId}/comments/${commentId}/likes`)
             .then((response) => {
-                console.log(response.data);
                 setLikes(response.data); // I update the like count client-side to avoid making another API call.
             })
             .catch((error) => {

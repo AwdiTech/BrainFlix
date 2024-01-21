@@ -25,16 +25,16 @@ function Header() {
         <header className="main-nav">
 
             <div className='main-nav__logo-container'>
-                <Link className='main-nav__logo-link-wrapper' to='/'><img className="main-nav__logo bf-logo" src={logo} alt="" /></Link> {/*BrainFlix Logo*/}
+                <Link className='main-nav__logo-link-wrapper' to='/'><img className="main-nav__logo bf-logo" src={logo} alt="" /></Link>
             </div>
 
             <div className="main-nav__search-bar">
                 <img src={searchIcon} className="main-nav__search-icon" alt="" />
-                <input type="text" placeholder="Search" className="main-nav__search-input" />   {/* CHANGE THIS INPUT TO TYPE SEARCH AND PUT FORM AROUND IT? */}
+                <input type="text" placeholder="Search" className="main-nav__search-input" />  
             </div>
 
             <div className='main-nav__user-icon-container'>
-                <img className="main-nav__user-icon user-icon" src={userIcon} alt="" /> {/*Icon*/}
+                <img className="main-nav__user-icon user-icon" src={userIcon} alt="" />
             </div>
 
             <button className="main-nav__upload-button cta-button" onClick={gotoUpload}>
