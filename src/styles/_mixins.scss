@@ -2,6 +2,7 @@
 
 @use './variables' as *;
 
+// --- Breakpoint Mixins ---
 @mixin mobile-breakpoint {
     @media screen and (min-width: $mobile-breakpoint) {
         @content;
@@ -18,4 +19,11 @@
     @media screen and (min-width: $desktop-breakpoint) {
         @content;
     }
+}
+
+// --- Helper Mixins ---
+@mixin center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
