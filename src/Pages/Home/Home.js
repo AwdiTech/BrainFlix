@@ -17,10 +17,6 @@
  * API Integration:
  * - Utilizes Axios for API requests to fetch video details and manage comments.
  * 
- * Functions:
- * - postComment: Submits a new comment to the selected video.
- * - deleteComment: Removes a selected comment from the selected video.
- * 
  * Component Structure:
  * - VideoPlayer: Renders the video player for the selected video.
  * - VideoDetails: Displays detailed information about the main video.
@@ -43,9 +39,9 @@ import NextVideosList from '../../components/VideoRecommendations/NextVideosList
 import './Home.scss';
 
 
+const API_URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 const DEFAULT_VIDEO_ID = "84e96018-4022-434e-80bf-000ce4cd12b8";
-const API_KEY = "3cbff5a7-5a14-46bc-a661-53871ee9b327";
-const API_URL = "https://project-2-api.herokuapp.com";
 
 
 function Home() {
@@ -70,10 +66,10 @@ function Home() {
 
         const fetchVideoData = async function () {
             try {
-                const videosResponse = axios.get(`${API_URL}/videos?api_key=${API_KEY}`, { 
+                const videosResponse = axios.get(`${API_URL}/videos`, { 
                     cancelToken: cancelTokenSource.token 
                 });
-                const videoDetailsResponse = axios.get(`${API_URL}/videos/${videoId ? videoId : DEFAULT_VIDEO_ID}?api_key=${API_KEY}`, { 
+                const videoDetailsResponse = axios.get(`${API_URL}/videos/${videoId ? videoId : DEFAULT_VIDEO_ID}`, { 
                     cancelToken: cancelTokenSource.token 
                 });
 
@@ -87,10 +83,12 @@ function Home() {
                 }
                 
             } catch (err) {
-                console.log("Error encountered:", err);
-                setError("Sorry, we're having trouble loading this content. Please try again later.");
+                if (!axios.isCancel(err)) {
+                    console.log("Error encountered:", err);
+                    setError("Sorry, we're having trouble loading this content. Please try again later.");
+                }
             }
-        }
+        }            
 
         fetchVideoData ();
 
@@ -110,48 +108,14 @@ function Home() {
     }, [mainVideo]);
 
 
-    // -----Functions-----
-    
-    // `postComment`: Posts a new comment to the backend and updates the local comments state and render without making another API call.
-    const postComment = function (newCommentObject, formElement) {
-        axios.post(`${API_URL}/videos/${mainVideo.id}/comments?api_key=${API_KEY}`, newCommentObject)
-        .then( (response) => {
-            alert("Comment Posted Successfully!");
-            const responseCommentObject = response.data;
-            setComments( (currentComments) => [responseCommentObject, ...currentComments] ); 
-            formElement.reset();
-                // Used a functional update here to avoid stale state.
-                // Added the newCommentObject into a new separate 'comments' state variable to avoid
-                //   making another API call, and in order to only trigger re-rendering for just the CommentSection. 
-        })
-        .catch ( (error) => {
-            alert("Error: Failed to post comment. Please try again later.");
-            console.error("Error:", error);
-        })
-    }
-
-    // `deleteComment`: Deletes a comment from the backend and updates the local comments state.
-    const deleteComment = function(commentId) {
-        axios.delete(`${API_URL}/videos/${mainVideo.id}/comments/${commentId}?api_key=${API_KEY}`)
-        .then( () => {
-            alert("Comment Deleted Successfully!");
-            setComments( (currentComments) => currentComments.filter( (comment) => comment.id !== commentId) );
-        })
-        .catch( (error) => {
-            alert("Error: Failed to Delete Comment! Please try again later.");
-            console.error("Error:", error);
-        })
-    }
-
-
     // -----Render Screens - Error Screen, Loading Screen, Successful Loading Screen
 
     // Error Screen (Styled using tailwindcss)
     if (error) {
         return (
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-40 ml-8 mr-8" role="alert">
-                <strong class="font-bold">Error: &ensp;</strong>
-                <span class="block sm:inline">{error}</span>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-40 ml-8 mr-8" role="alert">
+                <strong className="font-bold">Error: &ensp;</strong>
+                <span className="block sm:inline">{error}</span>
             </div>
         )
     }
@@ -180,6 +144,7 @@ function Home() {
             <section className='main-content'>
                 <section className='main-content__leftside'>
                     <VideoDetails
+                        videoId={mainVideo.id}
                         title={mainVideo.title}
                         channel={mainVideo.channel}
                         views={mainVideo.views}
@@ -187,7 +152,7 @@ function Home() {
                         timestamp={mainVideo.timestamp}
                         description={mainVideo.description}
                     />
-                    <CommentSection comments={comments} postComment={postComment} deleteComment={deleteComment} />
+                    <CommentSection comments={comments} setComments={setComments} mainVideoId={mainVideo.id} />
                 </section>
 
                 <section className='main-content__rightside'>

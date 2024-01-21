@@ -18,7 +18,7 @@ import LinesEllipsis from 'react-lines-ellipsis';
 
 function NextVideo({ id, title, channel, image, clickHandler }) {
 
-    // TO DO: fix bug with LinesEllipsis. Need to add a state variable and a 
+    // TO DO: Enhance accuracy for LinesEllipsis. Need to add a state variable and a 
         //      listener to track window size changes, so that the ellipsis can
             //  render properly. May need to use a combination of hooks 
             //  useState, and useEffect.
@@ -28,7 +28,7 @@ function NextVideo({ id, title, channel, image, clickHandler }) {
         <article className="next-video" onClick={ () => clickHandler(id) }>
 
             <div className="next-video__thumbnail-wrapper">
-                <img className="next-video__thumbnail" src={image} alt={title} />
+                <img className="next-video__thumbnail" src={process.env.REACT_APP_API_URL + image} alt={title} />
             </div>
 
             <div className="next-video__details">
