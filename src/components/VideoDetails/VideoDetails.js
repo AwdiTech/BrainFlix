@@ -1,8 +1,10 @@
 import viewsIcon from './../../assets/Icons/views.svg';
 import likesIcon from './../../assets/Icons/likes.svg';
+import likedIcon from './../../assets/Icons/liked.svg';
 import { TimeAgoContext } from './../../context/TimeAgoContext';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './VideoDetails.scss';
+import axios from 'axios';
 
 /**
  * VideoDetails Component
@@ -20,14 +22,36 @@ import './VideoDetails.scss';
  */
 
 
-function VideoDetails({ title, channel, views, likes, timestamp, description }) {
+function VideoDetails({ videoId, title, channel, views, likes, timestamp, description }) {
 
+    const [ likesState, setLikesState ] = useState(likes);
+    const [ liked, setLiked ] = useState(false);
     const calculateTimeAgo = useContext(TimeAgoContext)
+    const API_URL = process.env.REACT_APP_API_URL;
+
+    // Because I'm using a state to hold likes, I need to manually update it when the selected videoId changes.
+    useEffect(() => {
+        setLikesState(likes);
+        setLiked(false);
+    }, [videoId])
+    
+
+    const likeVideoHandler = function () {
+        axios.put(`${API_URL}/videos/${videoId}/likes`)
+            .then((response) => {
+                console.log(response.data);
+                setLikesState(response.data); // I update the like count client-side to avoid making another API call.
+                setLiked(true);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
 
     return (
         <section className='vid-details'>
 
-            <h1 className='vid-details__title page-header'>{title}</h1>
+            <h1 className='vid-details__title'>{title}</h1>
 
             <article className="vid-data">
                 <div className='vid-data__leftside-wrapper'>
@@ -37,12 +61,12 @@ function VideoDetails({ title, channel, views, likes, timestamp, description }) 
 
                 <div className='vid-data__rightside-wrapper'>
                     <div className="vid-data__views">
-                        <img className="views__icon" src={viewsIcon} alt="" />
+                        <img className="views-icon" src={viewsIcon} alt="" />
                         <p className="views__text special-label">{views}</p>
                     </div>
                     <div className="vid-data__likes">
-                        <img className="likes__icon" src={likesIcon} alt="" />
-                        <p className="likes__text special-label">{likes}</p>
+                        <img className="likes-icon" src={liked ? likedIcon : likesIcon} alt="" onClick={likeVideoHandler} />
+                        <p className="likes__text special-label">{likesState}</p>
                     </div>
                 </div>
             </article>
