@@ -82,6 +82,12 @@ function Home() {
                     setVideosList(videos.data.filter(video => video.id !== DEFAULT_VIDEO_ID));
                 }
                 
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+
             } catch (err) {
                 if (!axios.isCancel(err)) {
                     console.log("Error encountered:", err);
