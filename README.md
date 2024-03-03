@@ -1,7 +1,5 @@
 # BrainFlix
 
-*--Will Update this README as the project develops--*
-
 ![BrainFlix Interface](https://i.imgur.com/8EoV4DH.png)
 
 ## Overview
